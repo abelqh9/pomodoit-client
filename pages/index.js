@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import useSWR from 'swr';
 import Header from '../components/Header/Header';
 import Main from '../components/Main';
-import Loading from '../components/loading';
+import Loading from '../components/Loading';
 import { BestDayProvider } from '../contexts/BestDayContext';
 import { DBContextProvider } from '../contexts/DBContext';
 import { DistractionsRecordContextProvider } from '../contexts/DistractionsRecordContext';
