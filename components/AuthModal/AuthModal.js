@@ -59,7 +59,7 @@ export default function AuthModal(props) {
 
             {modalForm === "logIn" && <AuthModalLogInForm closeModal={closeModal}/>}
             {modalForm === "signUp" && <AuthModalSignUpForm closeModal={closeModal}/>}
-            {modalForm === "resetPassword" && <AuthModalResetPasswordForm closeModal={closeModal}/>}
+            {/* {modalForm === "resetPassword" && <AuthModalResetPasswordForm closeModal={closeModal}/>} */}
             
             <OptionsDiv>
                 {modalForm !== "logIn" && (

@@ -12,7 +12,13 @@ const P = styled.p`
         text-shadow: none;
         text-shadow: 0px 0px 2px var(--red);
     }
-    a{
+    /* a{
+        text-shadow: 0px 0px 2px var(--yellow);
+        color: var(--yellow);
+        text-decoration: none;
+    } */
+    span:last-child{
+        cursor: pointer;
         text-shadow: 0px 0px 2px var(--yellow);
         color: var(--yellow);
         text-decoration: none;
@@ -25,7 +31,9 @@ export default function Footer () {
 
     return(
         <StyledFooter>
-            <P>{appTexts.footer.madePhrase1} <span>❤️</span> {appTexts.footer.madePhrase2} <a href="/#">Abel Quezada</a></P>
+            {/* IN THE FUTURE MY NAME IS GOING TO BE A LINK */}
+            {/* <P>{appTexts.footer.madePhrase1} <span>❤️</span> {appTexts.footer.madePhrase2} <a href="/#">Abel Quezada</a></P> */}
+            <P>{appTexts.footer.madePhrase1} <span>❤️</span> {appTexts.footer.madePhrase2} <span>Abel Quezada</span></P>
         </StyledFooter>
     )
 }
