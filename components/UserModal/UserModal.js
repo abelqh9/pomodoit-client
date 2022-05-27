@@ -65,9 +65,11 @@ export default function UserModal(props) {
         fetch(process.env.NEXT_PUBLIC_API_URL + '/api/auth/logout', {
             method: 'POST',
             mode: 'cors',
-            credentials: 'include'
-        }).then(() => setUserData(null))
+            credentials: 'include',
+            headers: {'Content-Type': 'application/json'},
+        })
         .catch(err=>console.log(err));
+        setUserData(null)
     }
 
     return(
