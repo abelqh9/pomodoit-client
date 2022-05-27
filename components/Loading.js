@@ -18,7 +18,7 @@ const StyledLoading = styled.div`
 
 function Loading() {
     return (
-        <StyledLoading>
+        <StyledLoading className='Loading'>
             <Image src={loaderSvg} alt='loading'/>
         </StyledLoading>
     )

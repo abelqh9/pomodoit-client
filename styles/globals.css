@@ -65,3 +65,20 @@ body{
     text-align: center;
     font-family: "8bitOperatorPlus-Regular", "Consolas";
 }
+
+/* -------------- AUXILIARY CODE -------------- */
+/* this is for the Loading component */
+/* the Loading styles need to be downloaded first */
+/* for  avoid other components flashes before the Loading appears*/
+.Loading{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    z-index: 2000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background-color: var(--primary-background-color);
+}
