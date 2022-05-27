@@ -45,6 +45,8 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
 
+            {(data || error) ? null : <Loading />}
+
             <DBContextProvider>
                 <ScoreRecordProvider>
                     <TextsProvider>
@@ -68,8 +70,6 @@ export default function Home() {
                     </TextsProvider>
                 </ScoreRecordProvider>
             </DBContextProvider>
-
-            {(data || error) ? null : <Loading />}
         </StyledHome>
     )
 }
