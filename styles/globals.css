@@ -1,16 +1,67 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+/* -------------- FONTS -------------- */
+@font-face {
+    font-family: "8bitOperatorPlus-Regular";
+    src: url("../public/8bitOperatorPlus-Regular.woff") format("woff");
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+@font-face {
+    font-family: "8bitOperatorPlus-Bold";
+    src: url("../public/8bitOperatorPlus-Bold.woff") format("woff");
 }
 
-* {
-  box-sizing: border-box;
+/* -------------- VARIABLES -------------- */
+:root{
+  --primary-background-color: hsl(268, 75%, 9%);
+  --secondary-background-color: hsl(268, 63%, 17%);
+  --yellow: #F7FF00;
+  --red: #fe0000;
+  --borderRadius: 0.5rem;
+  --green: rgb(153, 255, 0);
+  --boxShadow: 0px 0px 9px 0px rgba(0,0,0,0.75);
+  --H1TextShadow: 0px 0px 4px var(--yellow);
+  --ImgsDropShadow: 0px 0px 2px var(--yellow);
+}
+
+/* -------------- RESET CODE -------------- */
+*{
+    box-sizing: border-box;
+}
+
+body,h1,h2,h3,h4,p,ul{
+    margin: 0;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+span{
+    display: inline-block;
+}
+
+input, button{
+    background: none;
+    border: none;
+    outline: none;
+    color: inherit;
+    font-family: inherit;
+}
+
+button{
+    cursor: pointer;
+}
+
+body{
+    background-color: var(--primary-background-color);
+    color: white;
+    text-align: center;
+    font-family: "8bitOperatorPlus-Regular", "Consolas";
 }
