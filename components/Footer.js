@@ -27,7 +27,7 @@ export default function Footer () {
     return(
         <StyledFooter>
             <P>{appTexts.footer.madePhrase1}
-                <span>❤️</span>{appTexts.footer.madePhrase2}<Link href='https://abelquezada-website-client.vercel.app/'><a target='_blank'>Abel Quezada</a></Link>
+                <span>❤️</span>{appTexts.footer.madePhrase2} <Link href='https://abelquezada-website-client.vercel.app/'><a target='_blank'>Abel Quezada</a></Link>
             </P>
         </StyledFooter>
     )
