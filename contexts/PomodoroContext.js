@@ -5,12 +5,6 @@ import { useScoreRecordContext } from "./ScoreRecordContext";
 import missionCompleteUrl from '../public/metal-slug-mission-complete.mp3';
 import coinSoundUrl from '../public/snkneo-geo-insert-coin-soundx3.mp3';
 
-// let missionCompleteSound = new Audio(missionCompleteUrl);
-// let coinSound = new Audio(coinSoundUrl);
-
-// missionCompleteSound.volume = 1;
-// coinSound.volume = 0.5;
-
 const PomodoroContext = React.createContext();
 
 export function PomodoroContextProvider({ children }) {
@@ -19,7 +13,7 @@ export function PomodoroContextProvider({ children }) {
     const { increaseTimeRecord } = useTimeRecordContext();
     const { increaseScoreRecord } = useScoreRecordContext();
 
-    const [pomodoroState, setPomodoroState] = useState("");
+    const [pomodoroState, setPomodoroState] = useState(null);
     const [pomodoroTimes, setPomodoroTimes] = useState({ work: 0, rest: 0 });
     const [pomodoroTimeLeft, setPomodoroTimeLeft] = useState(0);
     const [pomodoroPreStopState, setPomodoroPreStopState] = useState("");
@@ -43,14 +37,19 @@ export function PomodoroContextProvider({ children }) {
     // SET THE ONMESSAGE OF THE WEB WORKER
     useEffect(() => {
         if (myWorker) {
+            let counterForPushData = 10;
             myWorker.onmessage = function (e) {
                 if (e.data >= 0) {
                     setPomodoroTimeLeft(e.data);
-                    if (pomodoroState === "work") {
-                        increaseTimeRecord({ pomodoroTimeLeft: e.data });
-                    }else{
-                        updateDoc({ pomodoroTimeLeft: e.data });
-                    }
+                    // FOR REDUCE THE CALLS TO THE SERVER
+                    if (!counterForPushData) {
+                        if (pomodoroState === "work") {
+                            increaseTimeRecord({ pomodoroTimeLeft: e.data });
+                        }else{
+                            updateDoc({ pomodoroTimeLeft: e.data });
+                        }
+                        counterForPushData = 10;
+                    }else{ counterForPushData -= 1; }
                 }
             };
         }
@@ -63,7 +62,6 @@ export function PomodoroContextProvider({ children }) {
     
     // IF EXIST THE USER IS LOGGED
     useEffect(() => {
-        // if ( userData && userData.pomodoroState ) {
         if ( userData ) {
             const { 
                 pomodoroState: pomodoroStateFromDB,
@@ -83,7 +81,7 @@ export function PomodoroContextProvider({ children }) {
                 setPomodoroPreStopState(pomodoroPreStopStateFromDB);
                 setPomodoroState("stop");
             }else{
-                setPomodoroState("");
+                setPomodoroState(null);
                 setNextPomodoroState("");
                 setPomodoroPreStopState("");
             }
@@ -91,7 +89,7 @@ export function PomodoroContextProvider({ children }) {
             setPomodoroTimeLeft(pomodoroTimeLeftFromDB);
             setPomodoroTimes(pomodoroTimesFromDB);
         }else{
-            setPomodoroState("");
+            setPomodoroState(null);
             setNextPomodoroState("");
             setPomodoroPreStopState("");
             setPomodoroTimes({ work: 0, rest: 0 });
@@ -184,6 +182,7 @@ export function PomodoroContextProvider({ children }) {
         
         updateDoc({
             pomodoroPreStopState: pomodoroState,
+            pomodoroTimeLeft: pomodoroTimeLeft,
             pomodoroState: "stop"
         });
 

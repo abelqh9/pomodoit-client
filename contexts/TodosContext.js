@@ -11,6 +11,7 @@ export function TodosContextProvider({ children }) {
     const { pomodoroState } = usePomodoroContext();
 
     const [todos, setTodos] = useState([]);
+    const [staticPomodoroState, setStaticPomodoroState] = useState(null);
 
     // FOR BACKUPDATA
     useEffect(() => {
@@ -19,26 +20,42 @@ export function TodosContextProvider({ children }) {
 
     // FOR THE INCREASE OF THE TIMES OF THE TODOS
     useEffect(() => {
-        let timeOut;
+        let interval;
+        let counterForPushData = 10;
+
         if( pomodoroState === "work" ){
-            timeOut = setInterval(() => {
-                setTodos(oldTodos=>{
+            interval = setInterval(() => {
+                let newTodosToPush;
+
+                setTodos(oldTodos => {
                     if ( oldTodos.find(t => t.isCounting) ){
                         const newTodosArr = oldTodos.map(td => {
-                            return ( td.isCounting )
+                            return td.isCounting
                                 ? { ...td, time: td.time + 1000, timeRegister: td.timeRegister + 1000 }
                                 : td;
                         });
-                        updateDoc({ todos: newTodosArr});
+                        if (!counterForPushData) newTodosToPush = newTodosArr;
                         return newTodosArr;
-                    }else{
-                        return oldTodos
-                    }
+                    }else{ return oldTodos }
                 })
+
+                // FOR REDUCE THE CALLS TO THE SERVER
+                if (!counterForPushData) {
+                    updateDoc({ todos: newTodosToPush});
+                    counterForPushData = 10;
+                }else{counterForPushData -= 1;}
             }, 1000);
         }
-        return () => { clearTimeout(timeOut) }
+        return () => { clearTimeout(interval) }
     }, [pomodoroState, updateDoc])
+
+    // SAVE TODOS TIME WHEN POMODORO STATE CHANGE
+    useEffect(() => {
+        if (pomodoroState !== staticPomodoroState) {
+            setStaticPomodoroState(pomodoroState);
+            updateDoc({todos});
+        }
+    }, [pomodoroState, staticPomodoroState, updateDoc, todos])
 
     function addTodo(name, thenFunction) {
         const newTodo = {
@@ -67,21 +84,6 @@ export function TodosContextProvider({ children }) {
     }
 
     function changeTodoProps(todoName, cb) {
-        // THIS WAY PRODUCE TWO CALLS TO THE API
-        // I DONT KNOW WHY
-
-        // setTodos(tds => {
-        //     const newTodosArr = tds.map(td => {
-        //         if ( td.name === todoName ) { 
-        //             const newProps = cb(td); 
-        //             return {...td, ...newProps}; 
-        //         }
-        //         return td;
-        //     })
-        //     updateDoc({ todos: newTodosArr });
-        //     return newTodosArr;
-        // })
-
         const newTodosArr = todos.map(td => {
             if ( td.name === todoName ) { 
                 const newProps = cb(td); 
