@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 import { UseTextsContext } from '../contexts/TextsContext';
@@ -12,13 +13,7 @@ const P = styled.p`
         text-shadow: none;
         text-shadow: 0px 0px 2px var(--red);
     }
-    /* a{
-        text-shadow: 0px 0px 2px var(--yellow);
-        color: var(--yellow);
-        text-decoration: none;
-    } */
-    span:last-child{
-        cursor: pointer;
+    a{
         text-shadow: 0px 0px 2px var(--yellow);
         color: var(--yellow);
         text-decoration: none;
@@ -31,9 +26,9 @@ export default function Footer () {
 
     return(
         <StyledFooter>
-            {/* IN THE FUTURE MY NAME IS GOING TO BE A LINK */}
-            {/* <P>{appTexts.footer.madePhrase1} <span>❤️</span> {appTexts.footer.madePhrase2} <a href="/#">Abel Quezada</a></P> */}
-            <P>{appTexts.footer.madePhrase1} <span>❤️</span> {appTexts.footer.madePhrase2} <span>Abel Quezada</span></P>
+            <P>{appTexts.footer.madePhrase1}
+                <span>❤️</span>{appTexts.footer.madePhrase2}<Link href='https://abelquezada-website-client.vercel.app/'><a target='_blank'>Abel Quezada</a></Link>
+            </P>
         </StyledFooter>
     )
 }
