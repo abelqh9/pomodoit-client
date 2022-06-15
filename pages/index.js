@@ -39,10 +39,22 @@ export default function Home() {
     return (
         <StyledHome>
             <Head>
-                <title>PomoDoIt | A productivity web app</title>
+                <link rel="apple-touch-icon" href="/alarm.png" />
+                <link rel="icon" href="/alarm.png" />
+
+                <meta property="og:title" content="PomoDoIt | A productivity web app" />
+                <meta property="og:description" content="A great web app to improve your productivity." />
+                <meta property="og:image" content="https:https://pomodoit-client.vercel.app/assets/preview.png" />
+                {/* <meta property="og:url" content="https://pomodoit-client.vercel.app/" /> */}
+
+                <meta name="twitter:card" content="summary" />
+                <meta name="twitter:site" content="@Dumbix9" />
+                {/* <meta property="og:url" content="https://pomodoit-client.vercel.app/" /> */}
+
                 <meta name="description" content="A great web app to improve your productivity." />
                 <meta name="theme-color" content="hsl(268, 75%, 9%)" />
-                <link rel="icon" href="/favicon.ico" />
+                <link rel="canonical" href="https://pomodoit-client.vercel.app/" />
+                <title>PomoDoIt | A productivity web app</title>
             </Head>
 
             {(data || error) ? null : <Loading />}
