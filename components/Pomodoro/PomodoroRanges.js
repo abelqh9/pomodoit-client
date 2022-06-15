@@ -31,7 +31,7 @@ function PomodoroRanges(props) {
                 titleImg={workImage}
                 min={0}
                 max={60}
-                step={0.1}
+                step={5}
                 handler={e => setWorkTime(Number(e.target.value))}
                 value={workTime}
                 isMoving={workRangeAlert}/>
@@ -41,7 +41,7 @@ function PomodoroRanges(props) {
                 titleImg={restImage}
                 min={0}
                 max={20}
-                step={0.1}
+                step={5}
                 handler={e => setRestTime(Number(e.target.value))}
                 value={restTime}
                 isMoving={restRangeAlert}/>
